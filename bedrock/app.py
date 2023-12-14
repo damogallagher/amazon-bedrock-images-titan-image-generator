@@ -34,7 +34,7 @@ def lambda_handler(event, context):
     <!DOCTYPE html>
     <html>
     <head>
-        <title>Amazon Bedrock - Stability AI</title>
+        <title>Amazon Bedrock - Titan Image Generator Model</title>
     </head>
     <body>
         <img src="{}" alt="Base64 Image">
@@ -52,21 +52,7 @@ def lambda_handler(event, context):
     }
 
 def invoke_titan_image(prompt, style_preset=None):
-        """
-        Invokes the Stability.ai Stable Diffusion XL model to create an image using
-        the input provided in the request body.
-
-        :param prompt: The prompt that you want Stable Diffusion  to use for image generation.
-        :param seed: Random noise seed (omit this option or use 0 for a random seed)
-        :param style_preset: Pass in a style preset to guide the image model towards a particular style.
-        :return: Base64-encoded inference response from the model.
-        """
-
         try:
-            # The different model providers have individual request and response formats.
-            # For the format, ranges, and available style_presets of Stable Diffusion models refer to:
-            # https://platform.stability.ai/docs/api-reference#tag/v1generation
-
             body = json.dumps(
                 {
                     "taskType": "TEXT_IMAGE",
@@ -97,5 +83,5 @@ def invoke_titan_image(prompt, style_preset=None):
             return base64_image_data
 
         except ClientError:
-            logger.error("Couldn't invoke Stable Diffusion XL")
+            logger.error("Couldn't invoke Titan Image Generator Model")
             raise
